@@ -1,7 +1,28 @@
 ![preview](https://media.giphy.com/media/3ohhwfW9OgNMwDLZra/giphy.gif)
 
 # Haproxy Custom Errors
-Custom http error pages for haproxy
+Custom HTTP error pages for [HAProxy](http://www.haproxy.org) load balancer
+
+# Installation
+Clone this repository to `/etc/haproxy/errors-custom` via SSH
+```bash
+git clone git@github.com:Jonathan-Rosewood/haproxy-custom-errors.git
+```
+or via http
+```bash
+git clone https://github.com/Jonathan-Rosewood/haproxy-custom-errors.git
+```
+Then edit your `haproxy.cfg` config file and restart haproxy service
+```bash
+# Add this rows to "defaults" or "backend" section
+errorfile 400 /etc/haproxy/errors-custom/400.http
+errorfile 403 /etc/haproxy/errors-custom/403.http
+errorfile 408 /etc/haproxy/errors-custom/408.http
+errorfile 500 /etc/haproxy/errors-custom/500.http
+errorfile 502 /etc/haproxy/errors-custom/502.http
+errorfile 503 /etc/haproxy/errors-custom/503.http
+errorfile 504 /etc/haproxy/errors-custom/504.http
+```
 
 # Error Code Definitions
 400 Bad Request:  
@@ -18,16 +39,3 @@ Custom http error pages for haproxy
 	The server cannot handle the request (because it is overloaded or down for maintenance). Generally, this is a temporary state.  
 504 Gateway Timeout:  
 	The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.  
-
-# Installation
-Edit your `haproxy.cfg` config file
-```bash
-# Add this rows to "defaults" or "backend" section
-errorfile 400 /etc/haproxy/errors-custom/400.http
-errorfile 403 /etc/haproxy/errors-custom/403.http
-errorfile 408 /etc/haproxy/errors-custom/408.http
-errorfile 500 /etc/haproxy/errors-custom/500.http
-errorfile 502 /etc/haproxy/errors-custom/502.http
-errorfile 503 /etc/haproxy/errors-custom/503.http
-errorfile 504 /etc/haproxy/errors-custom/504.http
-```
